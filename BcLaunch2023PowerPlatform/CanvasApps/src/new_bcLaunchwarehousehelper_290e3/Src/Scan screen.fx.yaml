@@ -12,15 +12,21 @@
     BarcodeScanner As barcodeScanner:
         BorderThickness: =0
         Fill: =varTheme.brandColor
-        Font: ='Segoe UI'
+        Font: =Font.'Segoe UI'
         Height: =85
-        HoverBorderColor: =Black
+        HoverBorderColor: =Color.Black
         HoverColor: =RGBA(0, 0, 0, 1)
         HoverFill: =RGBA(255, 255, 255, 1)
         OnCancel: =Navigate('Start Page', ScreenTransition.Fade);
-        OnScan: |-
-            =Set(varScannedItem, LookUp('itemsWithImage (microsoft/powerApps/beta)', number = Self.Value ));
-            Navigate('Item Screen', ScreenTransition.Fade);
+        OnScan: |
+            =// Temp mapping for barcode
+            Set(varScannedItemNumber, LookUp(colBarCodes, barcode = Self.Value).itemNumber);
+            If(
+                IsBlank(varScannedItemNumber),
+                Notify("Barcode does not match item number "&Self.Value),
+                Set(varScannedItem, LookUp('itemsWithImage (microsoft/powerApps/beta)', number = varScannedItemNumber));
+                Navigate('Item Screen', ScreenTransition.Fade);
+            );
         RadiusBottomLeft: =350
         RadiusBottomRight: =350
         RadiusTopLeft: =350
@@ -29,6 +35,7 @@
         Text: ="0"
         Visible: =false
         Width: =640
+        Y: =9
         ZIndex: =1
 
     btnNavigateToTest As button:
