@@ -7,8 +7,7 @@
   ],
   "DeployToDev": {
     "environmentName": "Sandbox",
-    "ppEnvironmentUrl": "https://orgc791aad2.crm.dynamics.com/",
-    "environment": "Sandbox",
-    "companyId": "a2db7307-078b-ed11-aad8-000d3a21edc2"
+    "companyId": "a2db7307-078b-ed11-aad8-000d3a21edc2",
+    "ppEnvironmentUrl": "https://orgc791aad2.crm.dynamics.com/"
   }
 }
